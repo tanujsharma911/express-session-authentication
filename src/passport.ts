@@ -31,7 +31,7 @@ export const initPassport = () => {
         profile: Profile,
         cb: any,
       ) {
-        console.dir(profile, { depth: null });
+        // console.dir(profile, { depth: null });
 
         const user = {
           displayName: profile.displayName,

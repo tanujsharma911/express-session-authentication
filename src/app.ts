@@ -13,6 +13,7 @@ import passport from "passport";
 import { initPassport } from "./passport.js";
 import authRoute from "./routes/auth.route.js";
 import { COOKIE_MAX_AGE } from "./contants.js";
+import { verifyAuth } from "./middleware/verifyAuth.middleware.js";
 
 const app: Express = express();
 
@@ -38,7 +39,10 @@ app.get("/health", (req, res) => {
 });
 app.use("/auth", authRoute);
 app.get("/", (req, res) => {
-  res.status(200).json(req.session);
+  res.status(200).json({ logedIn: req.isAuthenticated(), data: req.user });
+});
+app.get("/me", verifyAuth, (req, res) => {
+  res.status(200).json({ user: req.user });
 });
 
 export default app;
