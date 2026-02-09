@@ -5,5 +5,9 @@ export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
     next();
   }
 
-  return res.status(401).json({ message: "Unauthorized" });
+  return res.status(401).json({
+    success: false,
+    loggedIn: req.isAuthenticated(),
+    message: "Unauthorized request",
+  });
 };
